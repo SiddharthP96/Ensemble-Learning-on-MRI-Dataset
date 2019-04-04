@@ -4,7 +4,7 @@ from sklearn.ensemble import ExtraTreesClassifier
 import SimpleITK as sitk
 
 def makedata():
-#Define a function that converts .mha to numpy arrays and *normalises the data 
+#function that converts .mha to numpy arrays and *normalises the data 
 	no=6082560
 	ne=no*20
 	(a,b,c)=(176,216,160)
@@ -26,7 +26,7 @@ def makedata():
 		m2no=sitk.ReadImage(m2)
 		m1no=sitk.ReadImage(m1)
 		nno=sitk.ReadImage(n)
-#SimpleITK stuff
+#SimpleITK commands
 		m4n=sitk.GetArrayFromImage(m4no)
 		m3n=sitk.GetArrayFromImage(m3no)
 		m2n=sitk.GetArrayFromImage(m2no)
@@ -43,52 +43,42 @@ def makedata():
 							a2=mean(m2n[i-size:i+size,j-size:j+size,k])
 							a3=mean(m3n[i-size:i+size,j-size:j+size,k])
 							a4=mean(m4n[i-size:i+size,j-size:j+size,k])
-							'''a5=mean(m1n[i,j-size:j+size,k-size:k+size])
+							a5=mean(m1n[i,j-size:j+size,k-size:k+size])
 							a6=mean(m2n[i,j-size:j+size,k-size:k+size])
 							a7=mean(m3n[i,j-size:j+size,k-size:k+size])
 							a8=mean(m4n[i,j-size:j+size,k-size:k+size])
 							a9=mean(m1n[i-size:i+size,j,k-size:k+size])
 							a10=mean(m2n[i-size:i+size,j,k-size:k+size])
 							a11=mean(m3n[i-size:i+size,j,k-size:k+size])
-							a12=mean(m4n[i-size:i+size,j,k-size:k+size])'''
+							a12=mean(m4n[i-size:i+size,j,k-size:k+size])
 							size=4
 							b1=mean(m1n[i-size:i+size,j-size:j+size,k])
 							b2=mean(m2n[i-size:i+size,j-size:j+size,k])
 							b3=mean(m3n[i-size:i+size,j-size:j+size,k])
 							b4=mean(m4n[i-size:i+size,j-size:j+size,k])
-							'''b5=mean(m1n[i,j-size:j+size,k-size:k+size])
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
+							b5=mean(m1n[i,j-size:j+size,k-size:k+size])
 							b6=mean(m2n[i,j-size:j+size,k-size:k+size])
 							b7=mean(m3n[i,j-size:j+size,k-size:k+size])
 							b8=mean(m4n[i,j-size:j+size,k-size:k+size])
 							b9=mean(m1n[i-size:i+size,j,k-size:k+size])
 							b10=mean(m2n[i-size:i+size,j,k-size:k+size])
 							b11=mean(m3n[i-size:i+size,j,k-size:k+size])
-							b12=mean(m4n[i-size:i+size,j,k-size:k+size])'''
+							b12=mean(m4n[i-size:i+size,j,k-size:k+size])
 							size=9
 							c1=mean(m1n[i-size:i+size,j-size:j+size,k])
 							c2=mean(m2n[i-size:i+size,j-size:j+size,k])
 							c3=mean(m3n[i-size:i+size,j-size:j+size,k])
 							c4=mean(m4n[i-size:i+size,j-size:j+size,k])
-							'''c5=mean(m1n[i,j-size:j+size,k-size:k+size])
+							c5=mean(m1n[i,j-size:j+size,k-size:k+size])
 							c6=mean(m2n[i,j-size:j+size,k-size:k+size])
 							c7=mean(m3n[i,j-size:j+size,k-size:k+size])
 							c8=mean(m4n[i,j-size:j+size,k-size:k+size])
 							c9=mean(m1n[i-size:i+size,j,k-size:k+size])
 							c10=mean(m2n[i-size:i+size,j,k-size:k+size])
 							c11=mean(m3n[i-size:i+size,j,k-size:k+size])
-							c12=mean(m4n[i-size:i+size,j,k-size:k+size])'''
+							c12=mean(m4n[i-size:i+size,j,k-size:k+size])
 							X6[count,:]=array([a1,a2,a3,a4,b1,b2,b3,b4,c1,c2,c3,c4])
-#Adding them context based features
+#Adding the context based features
 #Need to find averages at points (a-4,b,c) (a+4,b,c) (a,b-4,c) (a,b+4,c) (a,b,c+4) (a,b,c-4)
 						X[count,:]=array([m1n[i,j,k],m2n[i,j,k],m3n[i,j,k],m4n[i,j,k]])
 						Y[count]=array([nn[i,j,k]])
@@ -152,7 +142,7 @@ for i in range(size(Y)):
 		elif (Y[i]==k+1 and Yt[i]!=k+1):
 			fn+=1
 
-dsc=2*tp/(fp+fn+2*tp) #Dice Similarity Coefficient 
+dsc=2*tp/(fp+fn+2*tp)     #Dice Similarity Coefficient 
 ppv=tp/(tp+fp)		  #Posotive Predictive Value	
 s=tp/(tp+fn)		  #Senitivity
 
